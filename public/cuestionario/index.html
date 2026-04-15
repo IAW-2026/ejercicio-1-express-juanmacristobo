@@ -1,0 +1,34 @@
+<html>  
+<head>
+    <meta charset="UTF-8">
+    <title>Encuesta de Lenguajes</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <main>
+        <h1>¿Cuál es tu lenguaje favorito?</h1>
+
+        <form action="/cuestionario"method="POST">
+            <label for="lenguaje">Seleccioná una opción:</label>
+            <select name="lenguaje" id="lenguaje" required>
+                <option value="" disabled selected>-- Elegí uno --</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+            </select>
+
+            <br><br>
+            <button type="submit">Enviar respuesta</button>
+        </form>
+        
+        <br>
+        <a href="/">Volver al inicio</a>
+
+
+    </main>
+</body>
+
+
+</html>
