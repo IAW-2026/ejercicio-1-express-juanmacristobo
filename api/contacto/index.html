@@ -9,7 +9,7 @@
       <h2>Ponte en contacto con nosotros</h2>
       <h1>Contactate conmigo</h1>
 
-      <form action="/formulario-enviado" method="POST">
+      <form id="form-contacto" action="/api/contacto" method="POST">
         <div>
           <label for="nombre">Nombre:</label>
           <input type="text" id="nombre" name="nombre" required>
@@ -22,6 +22,7 @@
         <br>
         <button type="submit">Enviar mensaje</button>
       </form>
+      <p id="respuesta-contacto" aria-live="polite"></p>
     </section>
   </main>
 
@@ -34,4 +35,6 @@
   <footer>
     <p>&copy; 2024 Todos los derechos reservados</p>
   </footer>
+
+  <script src="/script.js"></script>
 </body>

@@ -36,17 +36,24 @@ app.get('/mensaje', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'mensaje', 'index.html'));
 });
 
-// Ruta raíz
-/*
-app.get('/', (req, res) => {
-  res.send('Hola mundo!');
+app.get('/contacto', (req, res) => {
+  res.sendFile(path.join(__dirname, 'api', 'contacto', 'index.html'));
 });
-*/
 
-// Middleware básico para manejo de errores
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: '¡Algo salió mal!' });
+
+//para q GET /api/productos devuelva un JSON con un array de productos.
+app.get('/api/productos', (req, res) => {
+  const productos = [
+    { id: 1, nombre: 'Camiseta', precio: 20 },
+    { id: 2, nombre: 'Pantalón', precio: 35 },
+    { id: 3, nombre: 'Zapatillas', precio: 60 }
+  ];
+
+  res.json(productos);
+});
+
+app.get('/productos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'productos', 'index.html'));
 });
 
 //Ruta que escucha el metodo POST
@@ -59,6 +66,22 @@ app.post('/formulario-enviado', (req, res) => {
         <p>Recibimos lo siguiente: "${mensaje}"</p>
         <a href="/">Volver al inicio</a>
     `);
+});
+
+app.post('/api/contacto', (req, res) => {
+  const { nombre, mensaje } = req.body;
+
+  if (!nombre || !mensaje) {
+    return res.status(400).json({
+      ok: false,
+      mensaje: 'Faltan datos: nombre y mensaje son obligatorios.'
+    });
+  }
+
+  return res.json({
+    ok: true,
+    mensaje: `Gracias por escribir, ${nombre}. Recibimos: "${mensaje}"`
+  });
 });
 
 app.post('/cuestionario', (req, res) => {
@@ -87,6 +110,15 @@ app.post('/mensaje', (req, res) => {
     <a href="/mensaje">Volver</a>
   `);
 });
+
+// Middleware basico para manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Algo salio mal.' });
+});
+
+
+
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
